@@ -1,0 +1,98 @@
+service: dynamodb-instagram
+
+plugins:
+    - serverless-esbuild
+    - serverless-offline
+
+provider:
+    name: aws
+    region: eu-west-2
+    runtime: nodejs12.x
+    environment:
+        TABLE_NAME: ScooterSchemeV2
+
+functions:
+    getUser:
+        handler: src/handlers/getUser.main
+        events:
+            - http:
+                  path: /users/{email}
+                  method: get
+    createUser:
+        handler: src/handlers/createUser.main
+        events:
+            - http:
+                  path: /users
+                  method: post
+    getAssets:
+        handler: src/handlers/getAssets.main
+        events:
+            - http:
+                  path: /assets
+                  method: get
+    createAsset:
+        handler: src/handlers/createAsset.main
+        events:
+            - http:
+                  path: /assets
+                  method: post
+    createSession:
+        handler: src/handlers/createSession.main
+        events:
+            - http:
+                  path: /session
+                  method: post
+    endSession:
+        handler: src/handlers/endSession.main
+        events:
+            - http:
+                  path: /session
+                  method: patch
+
+resources:
+    Resources:
+        ScooterSchemeV2:
+            Type: "AWS::DynamoDB::Table"
+            Properties:
+                KeySchema:
+                    - AttributeName: PK
+                      KeyType: HASH
+                    - AttributeName: SK
+                      KeyType: RANGE
+                AttributeDefinitions:
+                    - AttributeName: PK
+                      AttributeType: S
+                    - AttributeName: SK
+                      AttributeType: S
+                    - AttributeName: AssetId
+                      AttributeType: S
+                    - AttributeName: BayId
+                      AttributeType: S
+                GlobalSecondaryIndexes:
+                    - IndexName: Assets
+                      KeySchema:
+                          - AttributeName: PK
+                            KeyType: HASH
+                          - AttributeName: AssetId
+                            KeyType: RANGE
+                      Projection:
+                          ProjectionType: ALL
+                      ProvisionedThroughput:
+                          ReadCapacityUnits: 1
+                          WriteCapacityUnits: 1
+                    - IndexName: ScootersByBay
+                      KeySchema:
+                          - AttributeName: BayId
+                            KeyType: HASH
+                          - AttributeName: AssetId
+                            KeyType: RANGE
+                      Projection:
+                          ProjectionType: ALL
+                      ProvisionedThroughput:
+                          ReadCapacityUnits: 1
+                          WriteCapacityUnits: 1
+                BillingMode: PROVISIONED
+                TableName: ScooterSchemeV2
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 1
+                    WriteCapacityUnits: 1
