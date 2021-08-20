@@ -1,10 +1,10 @@
 ### GET USER DETAILS (inc sessions)
 
-GET http://localhost:3000/dev/users/s@s.com HTTP/1.1
+GET http://localhost:8000/dev/users/s@s.com HTTP/1.1
 
 ### CREATE USER
 
-POST http://localhost:3000/dev/users HTTP/1.1
+POST http://localhost:8000/dev/users HTTP/1.1
 content-type: application/json
 
 {
@@ -14,11 +14,11 @@ content-type: application/json
 
 ### ASSETS
 
-GET http://localhost:3000/dev/assets HTTP/1.1
+GET http://localhost:8000/dev/assets HTTP/1.1
 
 ### CREATE BAY (ASSET)
 
-POST http://localhost:3000/dev/assets HTTP/1.1
+POST http://localhost:8000/dev/assets HTTP/1.1
 content-type: application/json
 
 {
@@ -29,7 +29,7 @@ content-type: application/json
 
 ### CREATE SCOOTER (ASSET)
 
-POST http://localhost:3000/dev/assets HTTP/1.1
+POST http://localhost:8000/dev/assets HTTP/1.1
 content-type: application/json
 
 {
@@ -57,7 +57,7 @@ content-type: application/json
 
 ### UPDATE SESSION (End of Session)
 
-PATCH http://localhost:3000/dev/session HTTP/1.1
+PATCH http://localhost:8000/dev/session HTTP/1.1
 content-type: application/json
 
 {
@@ -67,11 +67,11 @@ content-type: application/json
 }
 
 ### GET ALL JOURNEY WAY POINTS (By Session - uses partial sessionId after hash)
-GET http://localhost:3000/dev/waypoints/123 HTTP/1.1
+GET http://localhost:8000/dev/waypoints/123 HTTP/1.1
 
 ### CREATE JOURNEY WAY POINT
 
-POST http://localhost:3000/dev/waypoints HTTP/1.1
+POST http://localhost:8000/dev/waypoints HTTP/1.1
 content-type: application/json
 
 {
