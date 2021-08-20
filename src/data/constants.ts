@@ -10,7 +10,6 @@ export interface Coords {
 }
 
 export interface Session {
-    type: string;
     sessionId: string;
     startTime: string;
     expiry: number;

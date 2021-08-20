@@ -42,12 +42,12 @@ content-type: application/json
 }
 
 ### CREATE SESSION (Start of Session)
+### TODO: move starttime, expiry calculation to server
 
-POST http://localhost:3000/dev/session HTTP/1.1
+POST http://localhost:8000/dev/session HTTP/1.1
 content-type: application/json
 
 {
-    "type": "Session",
     "sessionId": "SES#234",
     "startTime": "2021-08-19T19:51:45.145Z",
     "userId": "USR#s@s.com",

@@ -73,7 +73,7 @@ export const startSession = async (session: Session, userId: string): Promise<Se
                     UserId: userId,
                     Expiry: session.expiry,
                     StartTime: session.startTime,
-                    CreatedAt: Date.now(),
+                    CreatedAt: new Date().toISOString(),
                     Active: session.active ?? undefined
                 }),
                 ConditionExpression: "attribute_not_exists(PK)"
@@ -120,7 +120,7 @@ export const createUser = async (user: User): Promise<User> => {
         await client
             .putItem({
                 TableName: process.env.TABLE_NAME,
-                Item: { ...user.toItem(), CreatedAt: { N: `${Date.now()}` } },
+                Item: { ...user.toItem(), CreatedAt: { N: `${new Date().toISOString()}` } },
                 ConditionExpression: "attribute_not_exists(PK)"
             })
             .promise();

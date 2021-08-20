@@ -7,8 +7,8 @@ export const main: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent) 
         body: ""
     };
     try {
-        const { type, sessionId, startTime, userId, expiry, active } = JSON.parse(event.body);
-        const sess = { type, sessionId, startTime, expiry, userId, active };
+        const { sessionId, startTime, userId, expiry, active } = JSON.parse(event.body);
+        const sess = { sessionId, startTime, expiry, userId, active };
         await startSession(sess, userId);
         response.body = JSON.stringify(sess);
     } catch (error) {
