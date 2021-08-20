@@ -48,6 +48,18 @@ functions:
             - http:
                   path: /session
                   method: patch
+    getWaypoints:
+        handler: src/handlers/getWaypoints.main
+        events:
+            - http:
+                  path: /waypoints/{sessionId}
+                  method: get
+    createWaypoint:
+        handler: src/handlers/createWaypoint.main
+        events:
+            - http:
+                  path: /waypoints
+                  method: post
 
 resources:
     Resources:
