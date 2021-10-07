@@ -60,7 +60,12 @@ functions:
             - http:
                   path: /waypoints
                   method: post
-
+    batchWaypoint:
+        handler: src/handlers/batchWaypoint.main
+        events:
+            - http:
+                  path: /batchwp
+                  method: post
 resources:
     Resources:
         ScooterSchemeV2:

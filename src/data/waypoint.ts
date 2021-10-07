@@ -86,3 +86,50 @@ export const createWaypoint = async (waypoint: WayPoint): Promise<WayPoint> => {
         throw error;
     }
 };
+
+type coord = { lat: string; long: string; date: string };
+interface BatchWayPoint {
+    sessionId: string;
+    userId: string;
+    scooterId: string;
+    coords: coord[];
+    expiry: number;
+}
+
+export const batchCreateWaypoints = async (waypoints: BatchWayPoint): Promise<BatchWayPoint> => {
+    const client = getClient();
+    // foreach set of coords we create a PutRequest inside the batch
+    const requestItems = {};
+    requestItems[process.env.TABLE_NAME] = [];
+    waypoints.coords.forEach((coord) => {
+        const put = {
+            PutRequest: {
+                Item: marshall({
+                    PK: waypoints.sessionId,
+                    SK: `JWP#${coord.date}`,
+                    Type: "Journey Way Point",
+                    SessionId: waypoints.sessionId,
+                    UserId: waypoints.userId,
+                    ScooterId: waypoints.scooterId,
+                    Lat: coord.lat,
+                    Long: coord.long,
+                    Expiry: waypoints.expiry,
+                    CreatedAt: coord.date
+                })
+            }
+        };
+        requestItems[process.env.TABLE_NAME].push(put);
+    });
+    console.log("RI: ", requestItems);
+    try {
+        await client
+            .batchWriteItem({
+                RequestItems: requestItems
+            })
+            .promise();
+        return waypoints;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};

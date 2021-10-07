@@ -35,10 +35,12 @@ content-type: application/json
 {
     "type": "Scooter",
     "assetId": "SCO#234",
-    "lat": "54.43", 
-    "long": "0.333",
-    "batteryLevel": "55",
-    "bayId": "BAY#123"
+    "lat": "50.7200712", 
+    "long": "-1.84332620",
+    "batteryLevel": "76",
+    "bayId": "BAY#123",
+    "version": "1",
+    "inventory": "1"
 }
 
 ### CREATE SESSION (Start of Session)
@@ -80,5 +82,20 @@ content-type: application/json
     "userId": "USR#s@s.com",
     "lat": "50.720524",
     "long": "-1.842802",
-    "expiry": 1645059600
+    "expiry": 1633204901
+}
+
+### CREATE JOURNEY WAY POINT
+
+POST http://localhost:8000/dev/batchwp HTTP/1.1
+content-type: application/json
+
+{
+    "sessionId": "SES#123",
+    "scooterId": "SCO#123",
+    "userId": "USR#s@s.com",
+    "coords": [{"lat": "50.720524", "long": "-1.842802", "date": "2021-10-03T09:58:11.764Z" },
+        {"lat": "50.720525", "long": "-1.842803", "date": "2021-10-03T09:58:12.765Z" }
+    ],
+    "expiry": 1633204901
 }

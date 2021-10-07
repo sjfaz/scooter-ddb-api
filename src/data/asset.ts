@@ -11,6 +11,8 @@ export class Asset extends Item {
     coordinates?: Coords;
     batteryLevel?: string;
     bayId?: string;
+    version?: number;
+    inventory?: number;
 
     constructor(
         assetId: string,
@@ -19,7 +21,9 @@ export class Asset extends Item {
         long?: string,
         coords?: Coords,
         batteryLevel?: string,
-        bayId?: string
+        bayId?: string,
+        version?: number,
+        inventory?: number
     ) {
         super();
         this.assetId = assetId;
@@ -29,6 +33,8 @@ export class Asset extends Item {
         this.coordinates = coords ?? undefined;
         this.batteryLevel = batteryLevel ?? undefined;
         this.bayId = bayId ?? undefined;
+        this.version = version ?? undefined;
+        this.inventory = inventory ?? undefined;
     }
 
     static fromItem(item?: DynamoDB.AttributeMap): Asset {
@@ -42,7 +48,9 @@ export class Asset extends Item {
                     item.Long.S,
                     null,
                     item.BatteryLevel.S,
-                    item.BayId.S
+                    item.BayId.S,
+                    Number(item.Version.N),
+                    Number(item.Inventory.N)
                 );
             case "Bay":
                 return new Asset(
@@ -77,7 +85,9 @@ export class Asset extends Item {
                     Lat: { S: this.lat },
                     Long: { S: this.long },
                     BatteryLevel: { S: this.batteryLevel },
-                    BayId: { S: this.bayId }
+                    BayId: { S: this.bayId },
+                    Version: { N: this.version },
+                    Inventory: { N: this.inventory }
                 };
             case "Bay":
                 return { ...item, Coordinates: { M: this.toCoords(this.coordinates) } };
