@@ -1361,10 +1361,10 @@
   resolved "https://registry.npmjs.org/@types/retry/-/retry-0.12.0.tgz"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
-"@types/serverless@^1.72.5":
-  version "1.72.5"
-  resolved "https://registry.npmjs.org/@types/serverless/-/serverless-1.72.5.tgz"
-  integrity sha512-yD9miAGJMCVOJiRq0no8wD69aRVGpaN3M4H5H7GijT7DJYh8BqTLfO708mZsp/OfZAGxZmykn1rwMCmN8dhjtg==
+"@types/serverless@^1.78.36":
+  version "1.78.36"
+  resolved "https://registry.yarnpkg.com/@types/serverless/-/serverless-1.78.36.tgz#a7cf3b22825caa815de845f215aa20ca9379ff1a"
+  integrity sha512-ciFBz5IPFuWKWlZH1ZKc+fYdE5Eo4MYrcavstuKWbQxpCKT9XIenoXQhmYtQ0PG166EjQ+OQz8qynMCJNykEsQ==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
